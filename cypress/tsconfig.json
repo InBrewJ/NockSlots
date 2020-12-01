@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "include": [
+    "../node_modules/cypress/types/index.d.ts",
+    "../node_modules/cypress/types/blob-util.d.ts",
+    "../node_modules/cypress/types/minimatch.d.ts",
+    "../node_modules/cypress/types/bluebird.d.ts",
+    "../cypress/**/*.ts"
+  ],
+  "compilerOptions": {
+    "noEmit": false
+  },
+  "types": ["cypress"]
+}
