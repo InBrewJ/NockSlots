@@ -1,0 +1,12 @@
+type Query {
+  helloWorld: String!
+}
+
+type Mutation {
+  addThisToQueue(number: Int!): QueueResponse!
+}
+
+type QueueResponse {
+  number: Int
+  message: String
+}
