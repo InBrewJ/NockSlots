@@ -45,13 +45,16 @@ function AddToQueue() {
         }}
       >
         <input
+          data-id="queue-form"
           type="number"
           ref={(node) => {
             input = node;
           }}
         />
-        <button type="submit">Send to Queue</button>
-        <p>{JSON.stringify(data)}</p>
+        <button data-id="queue-send-button" type="submit">
+          Send to Queue
+        </button>
+        <p data-id="queue-response-box">{JSON.stringify(data)}</p>
       </form>
     </div>
   );

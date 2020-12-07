@@ -6,6 +6,6 @@ Given("I open the local dev server", () => {
   cy.visit(url);
 });
 
-Then("I see the React logo", () => {
-  cy.get(".App-logo");
+Then("I see the NockSlots logo", () => {
+  cy.contains("InNiT SiMPlE!");
 });
