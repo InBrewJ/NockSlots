@@ -34,19 +34,22 @@ function AddToQueue() {
   return (
     <div>
       <form
-        onSubmit={e => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          addThisToQueue({ variables: { number: Number(input.value) } });
-          input.value = '';
+          const queueRes = await addThisToQueue({
+            variables: { number: Number(input.value) },
+          });
+          console.log("queueRes :: ", queueRes);
         }}
       >
         <input
-          type='number'
-          ref={node => {
+          type="number"
+          ref={(node) => {
             input = node;
           }}
         />
         <button type="submit">Send to Queue</button>
+        <p>{JSON.stringify(data)}</p>
       </form>
     </div>
   );
@@ -65,11 +68,20 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
+        <span>
+          <a href="https://iconscout.com/icons/poker-chip" target="_blank">
+            Poker Chip Icon
+          </a>{" "}
+          by{" "}
+          <a
+            href="https://iconscout.com/contributors/LuizCarvalho"
+            target="_blank"
+          >
+            Luiz Carvalho
+          </a>
+        </span>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
           <a
             className="App-link"
             href="https://github.com/InBrewJ/NockSlots"
@@ -81,9 +93,7 @@ function App() {
           <p>
             <Hey />
           </p>
-          <p>
-            <AddToQueue />
-          </p>
+          <AddToQueue />
         </header>
       </div>
     </ApolloProvider>
