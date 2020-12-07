@@ -1,6 +1,27 @@
+require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 import { IResolvers } from "graphql-tools";
 import axios, { AxiosRequestConfig } from "axios";
-require("dotenv").config();
+import nock from "nock";
+
+const CHUCK_NORRIS_URL =
+  "https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com";
+const CHUCK_NORRIS_PATH = "/jokes/random";
+const USE_NOCKS = process.env.NOCK === "true";
+
+if (USE_NOCKS) {
+  nock(CHUCK_NORRIS_URL)
+    .persist()
+    .get(CHUCK_NORRIS_PATH)
+    .reply(200, {
+      categories: [1, 2, 3],
+      created_at: new Date(),
+      icon_url: "http://hey.com",
+      id: 5,
+      updated_at: new Date(),
+      url: "http://example.com",
+      value: "Chuck Norris loves NockSlots (lie)",
+    });
+}
 
 interface ChuckNorrisResponse {
   categories: any;
@@ -14,7 +35,7 @@ interface ChuckNorrisResponse {
 
 const options: AxiosRequestConfig = {
   method: "GET",
-  url: "https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random",
+  url: `${CHUCK_NORRIS_URL}${CHUCK_NORRIS_PATH}`,
   headers: {
     accept: "application/json",
     "x-rapidapi-key": process.env.CN_API_KEY,

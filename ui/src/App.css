@@ -2,8 +2,19 @@ svg {
   fill: #147edb;
 }
 
+.SlotsAttribution {
+  color: white;
+  background-color: #282c34;
+}
+
+.SlotsAttribution a {
+  color: white;
+  background-color: #282c34;
+}
+
 .App {
   text-align: center;
+  background-color: #282c34;
 }
 
 .App-logo {

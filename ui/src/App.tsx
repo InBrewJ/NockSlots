@@ -36,8 +36,10 @@ function AddToQueue() {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
+          const number: number = Number(input.value);
+          input.value = "";
           const queueRes = await addThisToQueue({
-            variables: { number: Number(input.value) },
+            variables: { number },
           });
           console.log("queueRes :: ", queueRes);
         }}
@@ -68,14 +70,19 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <span>
-          <a href="https://iconscout.com/icons/poker-chip" target="_blank">
+        <span className="SlotsAttribution">
+          <a
+            href="https://iconscout.com/icons/poker-chip"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Poker Chip Icon
           </a>{" "}
           by{" "}
           <a
             href="https://iconscout.com/contributors/LuizCarvalho"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Luiz Carvalho
           </a>
