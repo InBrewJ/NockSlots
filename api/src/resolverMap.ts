@@ -4,9 +4,15 @@ import nock from "nock";
 
 require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 
+const QUEUE_URL="http://localhost:9324/queue/nockslots-norris";
+
+const SQS_ENDPOINT="http://localhost:9324";
+
 const CHUCK_NORRIS_URL =
   "https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com";
+
 const CHUCK_NORRIS_PATH = "/jokes/random";
+
 const USE_NOCKS = process.env.NOCK === "true";
 
 if (USE_NOCKS) {
@@ -58,30 +64,20 @@ const resolverMap: IResolvers = {
         options
       );
       const message = `The number was: ${number} -> Chuck says: ${data.value}`;
-      console.log(`num: ${number} >> message : ${message}`);
 
       var AWS = require("aws-sdk");
       // Create an SQS service object to the local elasticmq endpoint
       var config = {
-        endpoint: new AWS.Endpoint('http://localhost:9324'),
+        endpoint: new AWS.Endpoint(SQS_ENDPOINT),
         accessKeyId: 'na',
         secretAccessKey: 'na',
         region: 'REGION'
       }
       var sqs = new AWS.SQS(config);
 
-      var queueURLParams = {
-        QueueName: 'nockslots-norris', /* required */
-        QueueOwnerAWSAccountId: 'STRING_VALUE'
-      };
-      sqs.getQueueUrl(queueURLParams, function(err: any, data: any) {
-        if (err) console.log(err, err.stack); // an error occurred
-        else     console.log(data);           // successful response
-      });
-
       const params = {
-        MessageBody: JSON.stringify(data.value),
-        QueueUrl: 'http://localhost:9324/queue/nockslots-norris'
+        MessageBody: JSON.stringify(message),
+        QueueUrl: QUEUE_URL
       };
       // send the message
 

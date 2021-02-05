@@ -1,0 +1,17 @@
+{
+  "name": "serverless",
+  "version": "1.0.0",
+  "description": "Super simple TypeScript SQS consumer",
+  "main": "QueueToDb.js",
+  "scripts": {
+    "test": "yarn test",
+    "simple-consumer": "npx ts-node ./src/consumer.ts"
+  },
+  "author": "jason@urawizard.com",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "aws-sdk": "^2.838.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}

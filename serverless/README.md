@@ -6,3 +6,9 @@
 - How do we run them locally? Perhaps like this:
   - https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html
   - https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging.html
+
+## Starting the starter script
+
+```
+npx ts-node ./src/consumer.ts
+```

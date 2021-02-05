@@ -18,5 +18,5 @@ Or, if you have a .pgpass file in this directory:
 
 ```
 export PGPASSFILE="`pwd`/.pgpass"
-psql -f seed.sql
+PGPASSFILE=".pgpass" psql -f seed.sql
 ```
