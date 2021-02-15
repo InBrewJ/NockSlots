@@ -36,6 +36,11 @@ sqs.receiveMessage(params, function(err: any, data: any) {
 
     console.log("MESSAGES MAN! ::->  ", data.Messages);
 
+    // data.Messages roughly maps onto the awk sdk type:
+    // SQSEvent.Records, which is in turn of type 'SQSRecord'
+    // This is what should go into the lambda handler as arg:
+    // "event: SQSEvent"
+
     var deleteParams = {
       QueueUrl: QUEUE_URL,
       ReceiptHandle: data.Messages[0].ReceiptHandle
