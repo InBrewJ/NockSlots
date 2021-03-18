@@ -12,3 +12,9 @@
 ```
 npx ts-node ./src/consumer.ts
 ```
+
+## Starting the starter poller
+
+```
+npx ts-node ./src/poller.ts
+```
