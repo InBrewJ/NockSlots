@@ -11,14 +11,10 @@ An exploration of the AWS provided tooling to create, test, build and run Lambda
 
 ## Contents
 
-- /lambda-nodejs12.x
-  - The sample application generated with the VSCode `AWS: Create new SAM application` command from the palette
-  - `sam local invoke HelloWorldFunction --event events/event.json`
-
 - /lambda-ts-node-sqs
   - A simple TypeScript lambda that takes an SQS event as its source
-  - `sam local invoke MySQSQueueFunction --event hello-sqs/fixtures/events/event.json`
+  - `sam local invoke MySQSQueueFunction --event hello-sqs/fixtures/events/event.json --docker-network nockslots_default`
 
 - /lambda-ts-node-cron
-  - Another simple TypeScript lambda that runs on a schedule, it talks to a database and the Chuck Norris api
-  - TBC
+  - Another simple TypeScript lambda that runs on a schedule, it talks to a database and the film API (or some other random API that can be mocked out)
+  - `sam local invoke MyCronFunction --event hello-cron/fixtures/events/event.json --docker-network nockslots_default`

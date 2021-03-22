@@ -1,0 +1,1 @@
+sam local invoke MySQSQueueFunction --event hello-sqs/fixtures/events/event.json --docker-network nockslots_default

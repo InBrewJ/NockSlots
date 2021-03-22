@@ -8,11 +8,12 @@ Resources:
       CodeUri: hello-sqs/
       Handler: app.handler
       Runtime: nodejs12.x
+      Timeout: 300000
       Events:
         MySQSEvent:
           Type: SQS
           Properties:
             Queue: !GetAtt MySqsQueue.Arn
-            BatchSize: 10
+            BatchSize: 1
   MySqsQueue:
     Type: AWS::SQS::Queue

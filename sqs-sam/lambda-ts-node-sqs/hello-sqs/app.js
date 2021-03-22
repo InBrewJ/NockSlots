@@ -1,12 +1,50 @@
 // const url = 'http://checkip.amazonaws.com/';
 let response;
 
-exports.handler = async function(event, context) {
-    records = [];
-    event.Records.forEach(record => {
-      const { body } = record;
-      console.log(body);
-      records.push(body);
-    });
-    return {'key': JSON.stringify(records)};
+const prettyPrint = (ob) => JSON.stringify(ob, null, 2).replace('\'','');
+const timestamp = () => new Date();
+
+const toBase64 = (msg) => Buffer.from(msg).toString('base64');
+
+const { Client } = require('pg');
+exports.handler = async function (event, context) {
+  console.log("the event");
+  console.log(event);
+
+  const client = new Client({
+    user: "test",
+    host: "db", // this is the 'service' name in the docker-compose.yaml
+    database: "nockslots",
+    password: "test",
+    port: 5432,
+  });
+
+  console.log("connecting to db...");
+
+  await client.connect();
+
+  records = [];
+  event.Records.forEach((record) => {
+    const { body } = record;
+    console.log(body);
+    records.push(toBase64(body));
+    // Add full message to the 'body' column
+    // Add the base64 message to the 'encoded_message' column
+  });
+
+  const query = `INSERT INTO public.messages (body, encoded_message) VALUES ('${prettyPrint(event)}', '${records[0]}');`;
+
+  console.log('the query:');
+  console.log(query);
+
+  try {
+    console.log("Trying the query...");
+    await client.query(query)
+    await client.end();
+  } catch (error) {
+    console.log('Could not add row to postgres, soz');
+    console.log(error);
   }
+
+  return { key: JSON.stringify(records) };
+};

@@ -7,14 +7,13 @@
   "author": "SAM CLI",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "pg": "^8.5.1"
   },
   "scripts": {
-    "test": "mocha tests/unit/",
-    "integ-test": "mocha tests/integration/"
+    "test": "mocha tests/unit/"
   },
   "devDependencies": {
-    "aws-sdk": "^2.815.0",
     "chai": "^4.2.0",
     "mocha": "^8.2.1"
   }

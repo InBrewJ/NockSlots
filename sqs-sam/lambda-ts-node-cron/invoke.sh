@@ -1,0 +1,1 @@
+sam local invoke MyCronFunction --event hello-cron/fixtures/events/event.json --docker-network nockslots_default
